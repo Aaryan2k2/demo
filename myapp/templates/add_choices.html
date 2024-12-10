@@ -1,0 +1,12 @@
+<h1>Add Choices to: "{{ question.question_text }}"</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ choice_form.as_p }}
+    <button type="submit">Add Choice</button>
+  </form>
+  <h2>Existing Choices:</h2>
+  <ul>
+    {% for choice in question.choice_set.all %}
+      <li>{{ choice.choice_text }}</li>
+    {% endfor %}
+  </ul>

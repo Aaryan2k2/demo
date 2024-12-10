@@ -1,0 +1,24 @@
+<!-- create_and_add_choices.html -->
+<h1>Create a New Question</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ question_form.as_p }}  <!-- Form for creating the question -->
+    <button type="submit">Create Question</button>
+</form>
+
+{% if question %}
+    <hr>
+    <h2>Add Choices to: "{{ question.question_text }}"</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ choice_form.as_p }}  <!-- Form for adding choices to the created question -->
+        <button type="submit">Add Choice</button>
+    </form>
+
+    <h3>Existing Choices:</h3>
+    <ul>
+        {% for choice in question.choice_set.all %}
+            <li>{{ choice.choice_text }}</li>  <!-- Display all choices for the question -->
+        {% endfor %}
+    </ul>
+{% endif %}
